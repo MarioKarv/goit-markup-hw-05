@@ -10,6 +10,8 @@
     --button-inactive: #188CE8;
     --icons: #AFB1B8;
     --icons-foot: rgba(255, 255, 255, 0.1);
+    --transition-duration: 250ms;
+    --transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 /* html{
@@ -101,6 +103,7 @@ body{
     margin-right: 50px;
 }
 .site-nav .link{
+    position: relative;
     display: block;
     padding-top: 32px;
     padding-bottom: 32px;
@@ -110,6 +113,7 @@ body{
     line-height: 1.14;
     letter-spacing: 0.02em;
     text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 .site-nav .link:hover,
@@ -140,11 +144,35 @@ body{
     text-decoration: none;
     display: flex;
     align-items: center;
+    transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 .contacts .meltel:hover,
 .contacts .meltel:focus{
     color: var(--accent-color);
+}
+
+.link::after{
+    display: block;
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    content: '';
+    width: 100%;
+    height: 4px;
+    background: var(--accent-color);
+    border-radius: 2px;
+    opacity: 0;
+    transition: opacity var(--transition-duration) var(--transition-timing-function);
+}
+
+/* .link:hover::after,
+.link:focus::after{
+    opacity: 1;
+} */
+
+.link.link.current::after{
+    opacity: 1;
 }
 
 .container{
@@ -210,11 +238,11 @@ body{
     margin: 0 auto;
     text-align: center;
     letter-spacing: 0.06em;
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
 }
 
 .button-main:hover,
 .button-main:focus{
-    color: var(--white);
     background-color: var(--button-inactive);
 }
 .buttons{
@@ -231,6 +259,10 @@ body{
     line-height: 26px;
     text-align: center;
     letter-spacing: 0.03em;
+    transition-property: border, color, background-color, box-shadow;
+    transition-duration: var(--transition-duration);
+    transition-timing-function: var(--transition-timing-function);
+
 }
 
 .but-sec:not(:last-child){
@@ -241,8 +273,6 @@ body{
     border: var(--accent-color);
     color: var(--white);
     background-color: var(--accent-color);
-    cursor: pointer;
-    font-family: inherit;
     box-shadow: 0px 3px 1px rgba(0, 0, 0, 0.1), 0px 1px 2px rgba(0, 0, 0, 0.08), 0px 2px 2px rgba(0, 0, 0, 0.12);
 }
 
@@ -409,7 +439,7 @@ body{
     justify-content: center;
     align-items: center;
     /* outline: 2px solid black; */
-    /* transition: 100000ms fill cubic-bezier(0.4, 0, 0.2, 1), background-color 100000ms cubic-bezier(0.4, 0, 0.2, 1); */
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
 }
 .link-icon:hover{
     background-color: var(--accent-color);
@@ -429,6 +459,7 @@ body{
 
 .social-networks{
     fill: var(--icons);
+    transition: fill var(--transition-duration) var(--transition-timing-function);
     /* outline: 1px solid tomato; */
 }
 
@@ -475,6 +506,7 @@ body{
 
 .link-portfolio{
     display: block;
+    transition: box-shadow var(--transition-duration) var(--transition-timing-function);
 }
 .link-portfolio:hover,
 .link-portfolio:focus{
@@ -489,6 +521,40 @@ body{
 
 .product-element:nth-last-child(-n + 3){
     margin-bottom: 0;
+}
+
+.img-port{
+    position: relative;
+    overflow: hidden;
+}
+
+.link-portfolio:hover .img-port-overlay{
+    transform: translateY(0);
+}
+
+.link-portfolio:focus .img-port-overlay {
+    transform: translateY(0);
+}
+
+.img-port-overlay{
+    position: absolute;
+    padding: 63px 24px;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: var(--white);
+    background: rgba(33, 150, 243, 0.9);
+
+    transform: translateY(100%);
+    transition: transform var(--transition-duration) var(--transition-timing-function);
+}
+
+.bg-text{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.6;
+    letter-spacing: 0.03em;
 }
 
 .companies{
@@ -506,6 +572,7 @@ body{
     color: var(--icons);
     border: 1px solid #AFB1B8;
     border-radius: 4px;
+    transition: color var(--transition-duration) var(--transition-timing-function), border-color var(--transition-duration) var(--transition-timing-function);
     /* outline: 2px solid black; */
 }
 
@@ -539,6 +606,7 @@ body{
 .address-link{
     color: var(--white);
     text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 .address-link:hover,
@@ -549,6 +617,7 @@ body{
 .address-mt{
     color: var(--footer-meltel);
     text-decoration: none;
+    transition: color var(--transition-duration) var(--transition-timing-function);
 }
 
 .address-mt:hover,
@@ -601,6 +670,7 @@ body{
     background-color: var(--icons-foot);
     justify-content: center;
     align-items: center;
+    transition: background-color var(--transition-duration) var(--transition-timing-function);
 }
 
 .foot-link-icon:hover {
@@ -621,6 +691,7 @@ body{
 
 .foot-social-networks {
     fill: var(--white);
+    transition: fill 250ms cubic-bezier(0.4, 0, 0.2, 1);
     /* outline: 1px solid tomato; */
 }
 
@@ -633,7 +704,7 @@ body{
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.2);
-    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1), visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+    transition: opacity var(--transition-duration) var(--transition-timing-function), visibility var(--transition-duration) var(--transition-timing-function);
 }
 
 .backdrop.is-hidden{
